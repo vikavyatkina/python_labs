@@ -59,4 +59,4 @@ symbols = len(fio)
 print(f'Инициалы: {initials}.')
 print(f'Длина Символов: {symbols}')
 ```
-![картинка номер 5](./images/lab01/ex5.png)
+![картинка номер 5](./images/lab01/ex05.png)
