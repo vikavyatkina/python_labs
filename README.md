@@ -31,6 +31,9 @@ vat = float(input('НДС, %:'))
 base = price * ( 1 - discount / 100)
 vat_amount = base * (vat / 100)
 total = base + vat_amount
+print(f'База после скидки: {base:.2f} ₽')
+print(f'НДС: {vat_amount:.2f} ₽')
+print(f'Итого к оплате: {total:.2f} ₽')
 ```
 ![картинка номер 3](./images/lab01/ex3.png)
 
@@ -57,7 +60,3 @@ print(f'Инициалы: {initials}.')
 print(f'Длина Символов: {symbols}')
 ```
 ![картинка номер 5](./images/lab01/ex5.png)
-
-print(f'База после скидки: {base:.2f} ₽')
-print(f'НДС: {vat_amount:.2f} ₽')
-print(f'Итого к оплате: {total:.2f} ₽')
