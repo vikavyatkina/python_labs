@@ -1,46 +1,37 @@
 def min_max(nums: list[float | int]) -> tuple[float | int, float | int]:
-    if not nums:
-        raise ValueError('Список пуст')
-    return (min(nums), max(nums))
+    if len(nums) == 0:
+        return 'ValueError'
+    return(min(nums), max(nums))
+print(min_max([3, -1, 5, 5, 0]))
+print(min_max([42]))
+print(min_max([-5, -2, -9]))
+print(min_max([]))
+print(min_max([1.5, 2, 2.0, -3.1]))
 
 def unique_sorted(nums: list[float | int]) -> list[float | int]:
-    return sorted(set(nums))
+    result = []
+    m = -10 * 10
+    nums = sorted(nums)
+    for i in nums:
+        if i > m:
+            result.append(i)
+            m = i
+    return result
+print(unique_sorted([3, 1, 2, 1, 3]))
+print(unique_sorted([]))
+print(unique_sorted([-1, -1, 0, 2, 2]))
+print(unique_sorted([1.0, 1, 2.5, 2.5, 0]))
 
 def flatten(mat: list[list | tuple]) -> list:
+    for a in mat:
+        if not(isinstance(a, (list, tuple))):
+            return 'TypeError'
     result = []
-    for i in mat:
-        if isinstance(i, (list, tuple)):
-            result.extend(i)
-        else:
-            raise TypeError('Элемент не подходит списку')
-    return result
-
-print('тест функции min_max')
-numbers = input('Введите числа через пробел:')
-if numbers:
-    numbers_list = [float(x) for x in numbers.split()]
-    try:
-        result = min_max(numbers_list)
-        print(f'Результат: {result}')
-    except ValueError as e:
-        print(f'Ошибка: {e}')
-print('тест функции unique_sorted')
-numbers = input('Введите числа через пробел:')
-if numbers:
-    numbers_list = [float(x) for x in numbers.split()]
-    result = unique_sorted(numbers_list)
-    print(f'Результат: {result}')
-print('тест функции flatten')
-print('Введите списки:')
-lists_input = input('для flatten:')
-if lists_input:
-    try:
-        lists = []
-        for item in lists_input.split(']['):
-            item = item.replace('[', '').replace(']','')
-            if item:
-                lists.append([float(x) for x in item.split(',')])
-        result = flatten(lists)
-        print(f'Результат: {result}')
-    except Exception as e:
-        print(f'Ошибка: {e}')
+    for i in range(len(mat)):
+        for j in range(len(mat[i])):
+            result.append(mat[i][j])
+    return result 
+print(flatten([[1, 2], [3, 4]]))
+print(flatten([[1, 2], (3, 4, 5)]))
+print(flatten([[1], [], [2, 3]]))
+print(flatten([[1, 2], "ab"]))
