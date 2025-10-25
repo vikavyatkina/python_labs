@@ -43,7 +43,7 @@ def tokenize(text: str) -> list[str]:
 def count_freq(tokens: list[str]) -> dict[str, int]:
     res = {}
     for i in tokens:
-        res[x] = res.get(x,0) + 1
+        res[i] = res.get(i,0) + 1
     sorted_res = sorted(res.items(), key = lambda i: (i[0], i[1]))
     return dict(sorted_res)
 
