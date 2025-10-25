@@ -13,7 +13,7 @@ def transpose(mat: list[list[float | int]]) -> list[list]:
     for s in range(stroci):
         for e in range(colons):
             result[e][s] = mat[s][e]
-        return result
+    return result
 print(transpose([[1, 2, 3]]))
 print(transpose([[1], [2], [3]]))
 print(transpose([[1, 2], [3, 4]]))
