@@ -199,3 +199,97 @@ print(format_record(r3))
 print(format_record(r4))
 ```
 ![картинка номер 3](./images/lab02/tuplesimage.png)
+
+
+## Лабораторная работа 3
+### Задание А 
+### №1
+```python
+def normalize(text: str, *, casefold: bool = True, yo2e: bool = True) -> str:
+    if casefold == True:
+        text = text.casefold()
+        #приводим к нижнему регистру
+    if yo2e == True:
+        text = text.replace('ё', 'е').replace('Ё', 'Е')
+        #заменяем ё и Ё
+    simbols = {'\t', '\r', '\n'}
+    for i in simbols:
+        text = text.replace(i, ' ')
+    while '  ' in text: #вырезаем повторяющиеся пробелы
+        text = text.replace('  ', ' ')
+    text = text.strip()
+
+    return text
+```
+![картинка1](./images/lab03/A1.png)
+
+### №2
+```python
+def tokenize(text: str) -> list[str]:
+    text_def = []
+    i = 0
+    while i < len(text):
+        if text[i] == '-':
+            if i > 0 and i < len(text) - 1: #если он не с краю
+                if (text[i-1].isalnum() or text[i-1] == '_') and (text[i+1].isalnum() or text[i+1] == '_'):
+                    text_def.append('_') #замена с дефиса на _
+        else:
+            text_def.append(text[i])
+        i += 1
+    text_def = ''.join(text_def) + ' '
+    slovo = ''
+    res = []
+    for x in text_def:
+        if x.isalnum() or x == '_':
+            slovo += x
+        else:
+            if len(slovo) != 0:
+                slovo = slovo.replace('_', '-') #обратно возвращаем дефисы
+                res.append(slovo) #добавляем слово
+                slovo = '' #освобождаем ячейку для следующего слова
+    return res
+```
+![картинка1](./images/lab03/A2.png)
+
+### №3-№4
+```python
+def count_freq(tokens: list[str]) -> dict[str, int]:
+    res = {}
+    for i in tokens:
+        res[i] = res.get(i,0) + 1
+    sorted_res = sorted(res.items(), key = lambda i: (i[0], i[1]))
+    return dict(sorted_res)
+
+
+def top_n(freq: dict[str, int], n: int = 5) -> list[tuple[str, int]]:
+    c = list(count_freq(freq).items())
+    return c[:n]
+```
+
+![картинка1](./images/lab03/A3.png)
+
+### Заадание В
+```python
+import sys
+import os
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
+from src.lib.text import*
+
+text = sys.stdin.read()
+
+textn = text
+
+text = normalize(text)
+text = tokenize(text)
+textn = text
+top = top_n(count_freq(text), n = 5)
+text = top_n(count_freq(text))
+
+
+print(f"Всего слов: {len(textn)}")
+print(f"Уникальных слов: {len(text)}")
+print("Топ-5:")
+for word, count in top:
+    print(f"{word}: {count}")
+```
+![картинка1](./images/lab03/B.png)
