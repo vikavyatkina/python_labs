@@ -42,12 +42,13 @@ def tokenize(text: str) -> list[str]:
 
 def count_freq(tokens: list[str]) -> dict[str, int]:
     res = {}
-    for i in tokens:
-        res[i] = res.get(i,0) + 1
-    sorted_res = sorted(res.items(), key = lambda i: (i[0], i[1]))
-    return dict(sorted_res)
-
+    for i in range(len(tokens)):
+        if tokens[i] in res:
+            continue
+        else:
+            res[tokens[i]] = tokens.count(tokens[i])
+    return res
 
 def top_n(freq: dict[str, int], n: int = 5) -> list[tuple[str, int]]:
-    c = list(count_freq(freq).items())
-    return c[:n]
+    sorted_items = sorted(freq.items(), key=lambda item: (-item[1], item[0]))
+    return sorted_items[:n]
