@@ -14,14 +14,12 @@ def json_to_csv(json_path: str, csv_path: str) -> None:
     
     if not json_path.exists():   # Явная проверка существования пути
         raise FileExistsError('Путь не найден')
-    '''
-    Работаем с открытым JSON-файлом на чтение, загружаем его, паралелльно отлавливая ошибки.
-    '''
+
     with open(json_path, 'r', encoding='utf-8') as json_file:
         try:
             data_json = json.load(json_file)
 
-        except json.JSONDecodeError:   # Выходит, когда файл невозможно загрузить в формате JSON
+        except json.JSONDecodeError:   #файл невозможно загрузить в формате JSON
             raise ValueError("Пустой JSON или неподдерживаемая структура")
         
         except not data_json:  # Явная проверка существования файла
