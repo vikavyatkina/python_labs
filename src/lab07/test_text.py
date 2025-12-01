@@ -1,11 +1,5 @@
-# Добавить путь к родительской папке src
 import sys
-import os
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-
-# Теперь импортировать
-from lib.text import normalize, tokenize, count_freq, top_n
-# Без префикса src!)
+sys.path.append("C:/Users/ravm7/OneDrive/Pa6ouni cton/python_labs/python_labs")
 import pytest
 import sys
 from src.lib.text import normalize, tokenize, count_freq, top_n
